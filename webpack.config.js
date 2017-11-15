@@ -17,10 +17,19 @@ module.exports = {
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
-    module: { //Обновлено
-        loaders: [ //добавили babel-loader
+    module: {
+        preLoaders: [ //добавили ESlint в preloaders
             {
-                loaders: ['babel-loader'],
+                test: /\.js$/,
+                loaders: ['eslint'],
+                include: [
+                    path.resolve(__dirname, "src"),
+                ],
+            }
+        ],
+        loaders: [ //все остальное осталось не тронутым
+            {
+                loaders: ['react-hot-loader', 'babel-loader'],
                 include: [
                     path.resolve(__dirname, "src"),
                 ],
